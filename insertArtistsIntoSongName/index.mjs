@@ -14,14 +14,16 @@ async function processSong(filePath) {
 			return
 		}
 
-		const artists = metadata.common.artist.split(',')
-		const uniqueArtists = [...new Set(artists.map(artist => artist.trim()))]
+		const artists = metadata.common.artist
 
 		// Read current tags using node-id3
 		const currentTags = NodeID3.read(filePath)
 
+		// Get the song name
+		const songName = metadata.common.title
+
 		// Only update the artist field
-		currentTags.artist = uniqueArtists.join(', ')
+		currentTags.title = songName + ' - ' + artists
 
 		console.log(`Updating metadata for: ${filePath}`)
 		NodeID3.write(currentTags, filePath)
