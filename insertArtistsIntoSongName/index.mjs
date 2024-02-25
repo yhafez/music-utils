@@ -22,12 +22,26 @@ async function processSong(filePath) {
 		// Get the song name
 		const songName = metadata.common.title
 
-		// Only update the artist field
-		currentTags.title = songName + ' - ' + artists
+		if (currentTags.title?.includes(' - ')) {
+			// Check if artist is already in the title
+			const titleParts = currentTags.title.split(' - ')
+			if (titleParts[1] === artists) {
+				console.log(`Artist already in title for: ${filePath}`)
+				return
+			}
 
-		console.log(`Updating metadata for: ${filePath}`)
-		NodeID3.write(currentTags, filePath)
-		console.log(`Processed: ${filePath}`)
+			// Replace the artist with the new one
+			currentTags.title = titleParts[0] + ' - ' + artists
+			console.log(`Updating metadata for: ${filePath}`)
+			NodeID3.write(currentTags, filePath)
+			console.log(`Processed: ${filePath}`)
+		} else {
+			currentTags.title = songName + ' - ' + artists
+
+			console.log(`Updating metadata for: ${filePath}`)
+			NodeID3.write(currentTags, filePath)
+			console.log(`Processed: ${filePath}`)
+		}
 	} catch (error) {
 		console.error(`Error processing ${filePath}: ${error.message}`)
 	}
