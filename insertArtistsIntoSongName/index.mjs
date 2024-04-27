@@ -67,7 +67,7 @@ async function scanDirectory(directoryPath) {
 }
 
 // Hardcoded directory
-const directoryPath = '/Users/yahya/music/music'
+const directoryPath = '/Users/yahyahafez/Downloads'
 
 scanDirectory(directoryPath)
 	.then(() => console.log('Processing complete.'))

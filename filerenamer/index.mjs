@@ -245,6 +245,11 @@ const skipList = [
 	'Banx & Ranx',
 	'Honey & Badger',
 	'Honey&Badger',
+	'Chase & Status',
+	'Chase&Status',
+	'Cause & Affect',
+	'Cause&Affect',
+
 ]
 
 async function updateMetadata(filePath) {
@@ -375,5 +380,5 @@ function processDirectory(directory) {
 	})
 }
 
-const directoryPath = '/Users/yahya/Music/Music'
+const directoryPath = '/Users/yahyahafez/Downloads'
 processDirectory(directoryPath)
